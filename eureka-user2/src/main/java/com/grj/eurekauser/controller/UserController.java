@@ -47,7 +47,7 @@ public class UserController {
     public List<Map<String,Object>> getAllList(){
         List<Map<String,Object>> list = userService.listMaps();
         Map map = new HashMap<>();
-        map.put("msg","user-client:localhost:8091==>消费者查询学生时间:"+ new Date().toString());
+        map.put("msg","user-client:localhost:8093==>消费者查询学生时间:"+ new Date().toString());
         list.add(map);
         return list;
     }

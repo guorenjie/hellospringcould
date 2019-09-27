@@ -12,10 +12,12 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -31,7 +33,6 @@ public class BookController {
     private BookService bookService;
     @Autowired
     private UserClient userClient;
-    private BookMapper bookMapper;
 
     @ApiOperation("获取所有书籍")
     @ApiImplicitParams({
@@ -49,6 +50,11 @@ public class BookController {
         return bookService.save(book);
     }
 
+    /**
+     * 服务调用feign
+     * 测试ribbon以及hystrix
+     * @return
+     */
     @RequestMapping("/getAllUserList")
     public List<Map<String,Object>> getAllUserList(){
         return userClient.getAllUserList();

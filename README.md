@@ -18,7 +18,7 @@ Spring Boot可以离开Spring Cloud独立使用开发项目，但是Spring Cloud
 ### 3、SpringCloud主要框架
 
 - 服务的发现 —— Netflix Eureka
-- 服务的调用 ——RestTemplate和Feign
+- 服务的调用（客户端负载均衡） ——Ribbon+RestTemplate或Feign
 - 熔断器 —— Netflix Hystrix
 - 服务网关 —— Netflix Zuul
 - 分布式配置 —— Spring Cloud Config
@@ -53,5 +53,5 @@ maven创建父项目
 创建两个eureka-client子模块eureka-user和eureka-book,在eureka-book服务中调用eureka-user服务
 
 1. 在eureka-client的基础上加入正常项目依赖（eureka-book额外加入spring-cloud-starter-openfeign）
-2. 在eureka-client的基础上加入正常的项目开发以及配置（eureka-book启动类加入@EnableFeignClients注解,新建eureka-user客户端接口用来调用eureka-user服务）
-3. 此处也可使用RestTemplate实现服务调用，,可加入客户端负载均衡器Ribbon实现本地负载均衡（代码未实现）
+2. 在eureka-client的基础上加入正常的项目开发以及配置（eureka-book启动类加入@EnableFeignClients注解,新建eureka-user客户端接口加入@FeignClient("user-client")注解来调用eureka-user服务）
+3. 此处也可使用Ribbon+RestTemplate实现客户端负载均衡的服务调用（代码中使用的Feign默认集成了ribbon）
