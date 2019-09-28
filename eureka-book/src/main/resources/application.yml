@@ -26,7 +26,6 @@ spring:
     maxLifetime: 1800000
 server:
   port: 8092
-
 # slf4j日志配置
 logging:
   # 配置级别

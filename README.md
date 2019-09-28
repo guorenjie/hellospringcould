@@ -70,5 +70,18 @@ Feign默认集成了ribbon。**
   Feign默认集成了Hystrix。**
 
 1. bootstrap.yml中增加对Hystrix的配置
-2. 新建一个断路回调类实现eureka-user客户端接口
+2. 新建一个断路回调类实现eureka-user客户端接口,接口和实现类都加@Component注入spring容器中
 3. eureka-user客户端接口@FeignClient注解中加入name和fallback参数，name=服务提供者的客户端名称，fallback指向新建的回调类。
+4. Hystrix 仪表盘在pom.xml引入spring-cloud-starter-netflix-hystrix-dashboard的依赖，启动类中加入@EnableHystrixDashboard注解，开启hystrixDashboard，
+    设置Hystrix 仪表盘的sevlet
+    @Bean
+        public ServletRegistrationBean getServlet() {
+            HystrixMetricsStreamServlet streamServlet = new HystrixMetricsStreamServlet();
+            ServletRegistrationBean registrationBean = new ServletRegistrationBean(streamServlet);
+            registrationBean.setLoadOnStartup(1);
+            registrationBean.addUrlMappings("/actuator/hystrix.stream");
+            registrationBean.setName("HystrixMetricsStreamServlet");
+            return registrationBean;
+        }
+        
+访问http://localhost:8092/actuator/hystrix
