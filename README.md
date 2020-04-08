@@ -85,3 +85,5 @@ Feign默认集成了ribbon。**
         }
         
 访问http://localhost:8092/actuator/hystrix
+
+end
