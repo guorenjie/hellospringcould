@@ -1,4 +1,3 @@
-[spring-could教程](https://www.fangzhipeng.com/spring-cloud.html)
 # SpringCould的学习
 
 ## 一、SpringCould的简介
@@ -84,6 +83,7 @@ Feign默认集成了ribbon。**
             return registrationBean;
         }
         
+
 访问http://localhost:8092/actuator/hystrix
 
 end
